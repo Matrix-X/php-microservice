@@ -11,8 +11,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Algorithm\Dice;
 
+use GuzzleHttp\Client;
+
 class BattleController extends Controller
 {
+
+    const USER_ENDPOINT = 'http://microservice_user_nginx/api/v1/user/';
 
     protected $battleAlgorithm = null;
     protected function setBattleAlgorithm()
@@ -28,10 +32,13 @@ class BattleController extends Controller
     {
         $this->setBattleAlgorithm();
         $duelResult = $this->battleAlgorithm->fight();
+        $client = new Client(['verify' => false]);
+        $player1Data = $client->get( self::USER_ENDPOINT . $request->input('userA'));
+        $player2Data = $client->get( self::USER_ENDPOINT . $request->input('userB'));
+
         return response()->json(
             [
-                'player1'     => $request->input('userA'),
-                'player2'     => $request->input('userB'),
+                'player1' => json_decode($player1Data->getBody()), 'player2' => json_decode($player2Data->getBody()),
                 'duelResults' => $duelResult
             ] );
     }

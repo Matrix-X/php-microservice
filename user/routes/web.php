@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
 
 $router->group([
     'prefix' => 'api/v1',
-    'middleware' => 'api_key',
+//    'middleware' => 'api_key',
     ],
     function ($app) {
         $app->get('user', 'UserController@index');
