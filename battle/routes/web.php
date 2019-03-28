@@ -14,3 +14,13 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+
+$router->group([
+    'prefix' => 'api/v1',
+    'middleware' => 'api_key',
+],
+    function ($app) {
+        $app->post('battle/duel', 'BattleController@duel');
+    } );

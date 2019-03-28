@@ -67,6 +67,9 @@ $app->singleton(
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
+//$app->middleware([App\Http\Middleware\ApiKeyMiddleware::class]);
+$app->routeMiddleware(['api_key' => App\Http\Middleware\ApiKeyMiddleware::class]);
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
