@@ -93,6 +93,16 @@ $app->configure('database');
 $app->configure('queue');
 
 
+$app->configureMonologUsing(function($monolog) {
+    $client = new Raven_Client('sentry-dsn');
+    $monolog->pushHandler(
+        new MonologHandlerRavenHandler($client,
+            MonologLogger::WARNING)
+    );
+    return $monolog;
+});
+
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

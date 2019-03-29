@@ -40,6 +40,8 @@ class UserController extends Controller
     public function create(Request $request)
     {
 
+        error_log();
+
         /* ... Code omitted (validate & save data) ... */
         $this->dispatch(new GiftJob());
         /* ... Code omitted ... */
