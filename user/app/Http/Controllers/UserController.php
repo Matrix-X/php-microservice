@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use GuzzleHttp\Client;
+
+use App\Jobs\GiftJob;
+
 class UserController extends Controller
 {
 
@@ -35,6 +39,11 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
+
+        /* ... Code omitted (validate & save data) ... */
+        $this->dispatch(new GiftJob());
+        /* ... Code omitted ... */
+
         return response()->json(['method' => 'create']);
     }
 
@@ -61,4 +70,26 @@ class UserController extends Controller
             'id' => $id, 'latitude' => $latitude,
             'longitude' => $longitude]);
     }
+
+
+    public function getWallet($id)
+    {
+        /* ... Code ommited ... */
+        $client = new Client(['verify' => false]);
+        try {
+            $remoteCall = $client->get(
+                'http://microservice_secret_nginx/api/v1/secret/1'
+//                'http://this_uri_is_not_going_to_work'
+            );
+        } catch (ConnectException $e) {
+            /* ... Code ommited ... */
+            throw $e;
+        } catch (ServerException $e) {
+            /* ... Code ommited ... */
+        } catch (Exception $e) {
+            /* ... Code ommited ... */
+        }
+
+    }
+
 }

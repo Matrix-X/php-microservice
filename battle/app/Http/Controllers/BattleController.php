@@ -17,6 +17,7 @@ class BattleController extends Controller
 {
 
     const USER_ENDPOINT = 'http://microservice_user_nginx/api/v1/user/';
+//    const USER_ENDPOINT = 'http://10.183.254.163:8084/api/v1/user/';
 
     protected $battleAlgorithm = null;
     protected function setBattleAlgorithm()

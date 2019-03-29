@@ -14,3 +14,14 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->group([
+    'prefix' => 'api/v1',
+//    'middleware' => 'api_key',
+],
+    function ($app) {
+        $app->get('secret', 'SecretController@index');
+        $app->get('secret/{id}', 'SecretController@get');
+        $app->post('secret', 'SecretController@create');
+    } );

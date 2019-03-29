@@ -30,4 +30,6 @@ $router->group([
         $app->get('user/{id}/location', 'UserController@getCurrentLocation');
         $app->post('user/{id}/location/latitude/{latitude}/longitude/{longitude}', 'UserController@setCurrentLocation');
 
+        $app->get('user/{id}/wallet', 'UserController@getWallet');
+
     } );

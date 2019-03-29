@@ -85,6 +85,14 @@ $app->routeMiddleware(['api_key' => App\Http\Middleware\ApiKeyMiddleware::class]
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
+
+$app->register(
+    Illuminate\Redis\RedisServiceProvider::class
+);
+$app->configure('database');
+$app->configure('queue');
+
+
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
